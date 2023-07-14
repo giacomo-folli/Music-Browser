@@ -3,9 +3,7 @@
 	$title = "Profile";
 
 	if(!is_logged_in())
-	{
 		redirect('login');
-	}
 
 	$id = user('id');
 	$query = "SELECT * FROM users WHERE id = '$id'";
@@ -23,9 +21,7 @@
 		$total_songs = query($query);
 
 		$total_songs = $total_songs[0]['total'];
-	
 	}
-
 ?>
 
 	<?php require 'header.php';?>
@@ -38,7 +34,7 @@
 		<div style="color:red;padding:10px;text-align:center">
 			<?php
 				if(!empty(message())) {
-					echo message("", true);
+					echo message('', true);
 				} 
 			?>
 		</div>	
@@ -46,7 +42,7 @@
 		<?php if(!empty($row)): ?>
 			<div class="class_36" >
 				<div class="class_37" >
-					<img src="<?=get_image(user('image'))?>" class="class_38" >
+					<img src="<?=get_image($row['image'])?>" class="class_38" >
 
 					<h1 class="class_18" style="margin-bottom:0px;" >
 						<?=$row['first_name']?> <?=$row['last_name']?>
@@ -103,14 +99,20 @@
 										</audio>
 									</div>
 								</div>
-								<div class="class_48" >
-									<button class="class_49"  >
-										Edit
-									</button>
-									<button class="class_50"  >
-										Delete
-									</button>
-								</div>				
+								<?php if(user('id') == $row['id']): ?>
+									<div class="class_48" >
+										<a href="upload.php?mode=edit&id=<?=$song['id']?>">
+											<button class="class_49"  >
+												Edit
+											</button>
+										</a>
+										<a href="upload.php?mode=delete&id=<?=$song['id']?>">
+											<button class="class_50"  >
+												Delete
+											</button>
+										</a>
+									</div>	
+								<?php endif; ?>			
 							</div>
 						<?php endforeach?>
 

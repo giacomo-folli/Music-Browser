@@ -52,7 +52,7 @@
 		</div>
 		<div class="class_8"  >
 			<?php if(is_logged_in()):?>
-				<img src="<?=get_image(user('image'))?>" class="class_9" >
+				<img src="<?=get_image($row['image'])?>" class="class_9" >
 				<div>Hi, <?=user('username')?>
 					<a style="width:100%; display:block" href="logout.php">[Logout]</a>
 				</div>

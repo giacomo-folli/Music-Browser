@@ -43,12 +43,12 @@ function redirect(string $url)
     die;
 }
 
-function message($message = "", $delete = false)
+function message($message = '', $delete = false)
 {
     if(!empty($message)){
         $_SESSION['message'] = $message;
     } else {
-        if (!$_SESSION['message']) {
+        if (!empty($_SESSION['message'])) {
             $msg = $_SESSION['message'];
 
             if ($delete) 
@@ -56,6 +56,7 @@ function message($message = "", $delete = false)
             return $msg;
         }
     }
+    return '';
 }
 
 function old_value($key, $default = ""){
