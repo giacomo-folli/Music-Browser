@@ -10,7 +10,7 @@
 <body>
 	<header class="class_1" >
 		<div class="class_2" >
-			<img src="assets/images/attachment_123775517.jpg" class="class_3" >
+			<img src="assets/images/attachment_123775517.jpg" style="max-width:60px; height:auto; margin-left:20px;" class="class_3" >
 		</div>
 		<div  class="item_class_0 class_4">
 			<div  class="item_class_1 class_5">
@@ -19,32 +19,32 @@
 					</path>
 				</svg>
 			</div>
-			<div  class="item_class_2 class_6">
-				<a href="index.php" class="class_7"  >
+			<div style="display:flex;" class="class_6">
+				<a href="index.php" style="border-radius:10%;" class="class_7"  >
 					Home
 				</a>
-				<a href="artists.php" class="class_7"  >
+				<a href="artists.php" style="border-radius:10%;" class="class_7"  >
 					Artists
 				</a>
 				<?php if(is_logged_in()): ?>
-					<a href="upload.php" class="class_7"  >
+					<a href="upload.php" style="border-radius:10%;" class="class_7"  >
 						Upload
 					</a>
-					<a href="profile.php" class="class_7"  >
+					<a href="profile.php" style="border-radius:10%;" class="class_7"  >
 						Profile
 					</a>	
 				<?php endif; ?>
-				<a href="about-us.php" class="class_7"  >
+				<a href="about-us.php" style="border-radius:10%;" class="class_7"  >
 					About us
 				</a>	
 				<?php if(is_admin()): ?>
-					<a href="admin/admin.php" class="class_7"  >
+					<a href="admin/admin.php" style="border-radius:10%;" class="class_7"  >
 						Admin
 					</a>	
 				<?php endif; ?>	
 			</div>
 		</div>
-		<div class="class_8"  >
+		<div style="border-radius:10%;" class="class_8" >
 			<?php if(is_logged_in()):?>
 				<img src="<?=get_image(user('image'))?>" class="class_9" >
 				<div>Hi, <?=user('username')?>
