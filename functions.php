@@ -2,6 +2,12 @@
 
 session_start();
 
+//get page number
+$page_number = $_GET['page'] ?? 1;
+$page_number = (int) $page_number;
+if($page_number < 1)
+    $page_number = 1;
+
 function is_logged_in():bool
 {
     if(!empty($_SESSION['USER']) && is_array($_SESSION['USER']))
@@ -10,6 +16,55 @@ function is_logged_in():bool
 	}
 
 	return false;
+}
+
+function is_admin():bool
+{
+    if(!empty($_SESSION['USER']) && is_array($_SESSION['USER']))
+	{
+		if($_SESSION['USER']['role'] == 'admin')
+            return true;
+	}
+
+	return false;
+}
+
+function add_page_view($song_id)
+{
+    $query = "UPDATE songs SET views = views + 1 WHERE id = '$song_id' LIMIT 1";
+    query($query);
+
+    $row = query("SELECT * FROM songs WHERE id = '$song_id' LIMIT 1"); //calculate popularity
+    if(!empty($row))
+    {
+        $now = time();
+        $days = round(($now - strtotime($row[0]['date'])) / (3600*24));
+
+        $popularity = 0;    
+        if($days > 0)
+            $popularity = ($row[0]['views'] + $row[0]['downloads']) / $days;
+
+        query("UPDATE songs SET popularity = '$popularity' WHERE id = '$song_id' LIMIT 1");
+    }
+}
+
+function add_song_download($song_id)
+{
+    $query = "UPDATE songs SET downloads = downloads + 1 WHERE id = '$song_id'";
+    query($query);
+
+    $row = query("SELECT * FROM songs WHERE id = '$song_id' LIMIT 1"); //calculate popularity
+    if(!empty($row))
+    {
+        $now = time();
+        $days = round(($now - strtotime($row[0]['date'])) / (3600*24));
+
+        $popularity = 0;    
+        if($days > 0)
+            $popularity = ($row[0]['views'] + $row[0]['downloads']) / $days;
+
+        query("UPDATE songs SET popularity = '$popularity' WHERE id = '$song_id' LIMIT 1");
+    }
 }
 
 function auth($row)

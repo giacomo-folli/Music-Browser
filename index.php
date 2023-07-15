@@ -2,8 +2,7 @@
 	require 'init.php';
 	$title = "Home";
 
-	$user_id = user('id');
-	$query = "SELECT * FROM songs ORDER BY id DESC LIMIT 30 ";
+	$query = "SELECT * FROM songs ORDER BY id DESC LIMIT 10";
 	$songs = query($query);
 
 	if(!empty($songs)) 

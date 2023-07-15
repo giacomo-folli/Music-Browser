@@ -23,22 +23,9 @@
 				<a href="index.php" class="class_7"  >
 					Home
 				</a>
-				<a href="latest.php" class="class_7"  >
-					Latest
+				<a href="artists.php" class="class_7"  >
+					Artists
 				</a>
-				<a href="popular.php" class="class_7"  >
-					Popular
-				</a>
-				<a href="top-20.php" class="class_7"  >
-					Top 20
-				</a>
-				<a href="contact-us.php" class="class_7"  >
-					Contact us
-				</a>
-				<a href="about-us.php" class="class_7"  >
-					About us
-				</a>
-
 				<?php if(is_logged_in()): ?>
 					<a href="upload.php" class="class_7"  >
 						Upload
@@ -47,12 +34,19 @@
 						Profile
 					</a>	
 				<?php endif; ?>
-							
+				<a href="about-us.php" class="class_7"  >
+					About us
+				</a>	
+				<?php if(is_admin()): ?>
+					<a href="admin/admin.php" class="class_7"  >
+						Admin
+					</a>	
+				<?php endif; ?>	
 			</div>
 		</div>
 		<div class="class_8"  >
 			<?php if(is_logged_in()):?>
-				<img src="<?=get_image($row['image'])?>" class="class_9" >
+				<img src="<?=get_image(user('image'))?>" class="class_9" >
 				<div>Hi, <?=user('username')?>
 					<a style="width:100%; display:block" href="logout.php">[Logout]</a>
 				</div>
@@ -61,9 +55,9 @@
 			<?php endif;?>
 		</div>
 	</header>
-	<div class="class_10" >
+	<form method="get" action="search.php" class="class_10" >
 		<label class="class_11"  >
 			Search
 		</label>
-		<input placeholder="" type="text" name="username" class="class_12" >
-	</div>
+		<input value="<?=$_GET['q'] ?? ''?>" placeholder="" type="text" name="q" class="class_12" >
+	</form>

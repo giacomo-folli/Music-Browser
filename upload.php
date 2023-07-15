@@ -9,7 +9,9 @@
 	$button_title = "Save";
 	$mode = $_GET['mode'] ?? "new";
 	$id = $_GET['id'] ?? 0;
+
 	$id = (int) $id;
+	$display = true;
 
 	//acces edit/delete temp pages, changes the main page
 	if($mode == 'edit' || $mode == 'delete')
@@ -17,42 +19,41 @@
 		if($mode == 'delete')
 			$button_title = "Delete";
 
-		$query = "SELECT * FROM songs WHERE id = '$id' LIMIT 1";
+		$user_id = user('id');
+		$query = "SELECT * FROM songs WHERE id = '$id' && user_id='$user_id' LIMIT 1"; //so you can only grab your own songs
 		$song = query($query);
 		if(!empty($song)) 
 		{
 			$song = $song[0];
 		}
+		else
+		{
+			$display = false;
+		}
 	}	
 
-	if($_SERVER['REQUEST_METHOD'] == "POST") //Something was posted
+	if($_SERVER['REQUEST_METHOD'] == "POST") //Something was posted 
 	{
 		$errors = [];
 		$title = addslashes($_POST['title']);
 
 		if(empty($title))
-		{
 			$errors['title'] = "Title is required";
-		}
 
 		$folder = "uploads/";
 		if(!file_exists($folder))
-		{
 			mkdir($folder, 0777, true);
-		}
 
 		$file_str = $image_str = "";
 
 		if(!empty($_FILES['file']['name']))
 		{
 			$allowed = ['audio/mpeg'];
-			if(in_array($_FILES['file']['type'], $allowed))
-			{
+			if(in_array($_FILES['file']['type'], $allowed))	{
 				$file = $folder . $_FILES['file']['name'];
 				$file_str = ", file = '$file' ";
 			} 
-			else 
-			{
+			else {
 				$errors['file'] = "Audio file not supported";
 			}
 		} else {
@@ -63,6 +64,7 @@
 		if(!empty($_FILES['image']['name']))
 		{
 			$allowed = ['image/jpeg','image/png','image/webp'];
+
 			if(in_array($_FILES['image']['type'], $allowed))
 			{
 				$image = $folder . $_FILES['image']['name'];
@@ -78,23 +80,26 @@
 		}
 
 		if(empty($errors)){
+			//save data
 			$user_id = user('id');
 
 			if(!empty($image))
 			{
 				move_uploaded_file($_FILES['image']['tmp_name'], $image);
+
 				if($mode == 'edit' && file_exists($song['image']))
 					unlink($song['image']);
 			}	
 			if(!empty($file))
 			{
 				move_uploaded_file($_FILES['file']['tmp_name'], $file);
+
 				if($mode == 'edit' && file_exists($song['file']))
 					unlink($song['file']);
 			}	
 
 			$query = "INSERT INTO songs (user_id, file, image, title, date) VALUES ('$user_id', '$file', '$image', '$title', NOW())";
-			message("Your song successfully added! Login to continue");
+			message("Your song successfully added!");
 			
 			if($mode == 'edit')
 			{
@@ -140,36 +145,40 @@
 				} 
 			?>
 		</div>
-		<div class="class_24" >
-			<label class="class_25"  >
-				Title
-			</label>
-			<input value="<?=old_value('title', $song['title'] ?? '')?>" placeholder="" type="text" name="title" class="class_12" >
-		</div>
-		<div class="class_26" >
-			<img src="<?=get_image($song['image'] ?? '')?>" class="js-image class_27" >
-			<input onchange="display_image(this.files[0])" type="file" name="image"  class="class_28">
-		</div>
-		<div class="class_26" >
-			<div class="class_29" >
-				<audio controls="" class="js-file class_30" >
-					<source src="<?=$song['file'] ?? ''?>" type="audio/mpeg" >
-				</audio>
+		<?php if($display): ?>
+			<div class="class_24" >
+				<label class="class_25"  >
+					Title
+				</label>
+				<input value="<?=old_value('title', $song['title'] ?? '')?>" placeholder="" type="text" name="title" class="class_12" >
 			</div>
-			<input onchange="load_file(this.files[0])" type="file" name="file" >
-		</div>
-		<div class="class_31" >
-			<button class="class_32"  >
-				<?=$button_title?>
-			</button>
-			<a href="profile.php">
-				<button type="button" class="class_33"  >
-					Cancel
+			<div class="class_26" >
+				<img src="<?=get_image($song['image'] ?? '')?>" class="js-image class_27" >
+				<input onchange="display_image(this.files[0])" type="file" name="image"  class="class_28">
+			</div>
+			<div class="class_26" >
+				<div class="class_29" >
+					<audio controls="" class="js-file class_30" >
+						<source src="<?=$song['file'] ?? ''?>" type="audio/mpeg" >
+					</audio>
+				</div>
+				<input onchange="load_file(this.files[0])" type="file" name="file" >
+			</div>
+			<div class="class_31" >
+				<button class="class_32"  >
+					<?=$button_title?>
 				</button>
-			</a>
-			<div class="class_34" >
+				<a href="profile.php">
+					<button type="button" class="class_33"  >
+						Cancel
+					</button>
+				</a>
+				<div class="class_34" >
+				</div>
 			</div>
-		</div>
+		<?php else: ?>
+			<div style="color:red;font-size:18px">Song not found</div>
+		<?php endif; ?>	
 	</form>
 </div>
 

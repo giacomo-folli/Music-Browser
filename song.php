@@ -20,6 +20,11 @@
         {
             $row = $row[0];
         }	
+
+		if(user('id') != $song['user_id'])
+			add_page_view($song['id']); //add a view to song
+
+		//add_song_download($song['id']);
 	}
 ?>
 
@@ -36,10 +41,12 @@
 					<img src="<?=get_image($song['image'])?>" class="class_38" style="min-width:400px; height:auto;">
 
 					<h1 class="class_18" style="margin-bottom:0px;" >
-						<?=$row['username']?> 
+						<a href="profile.php?id=<?=$row['id']?>">
+							<?=$row['username']?> 
+						</a>
 					</h1>
-
-					<div class="class_39" >
+					
+					<div class="class_39" style="display:block;" >
 						
                         <?php if(!empty($song)): ?>
                             <div class="class_44" style="width:100%">
@@ -53,8 +60,12 @@
                                             <source src="<?=$song['file']?>" type="audio/mpeg" >
                                         </audio>
                                     </div>
-                                </div>			
+                                </div>	
                             </div>
+								
+							<div style="color:black;text-align:center;">Page Views: <?=$song['views']?></div>
+							<div style="color:black;text-align:center;">Downloads: <?=$song['downloads']?></div>
+
                         <?php else: ?>
                             <div style="color:black; padding:10px; text-align:center;" >No song found!
                                 <br><a href="upload.php">Upload a song</a>

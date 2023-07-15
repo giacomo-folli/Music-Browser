@@ -80,6 +80,14 @@
 			$query = "UPDATE users SET username='$username', first_name='$first_name', last_name='$last_name', email='$email' $password_str $image_str WHERE id='$id' LIMIT 1;";
 			query($query);
 
+			$query = "SELECT * FROM users WHERE id = '$id' LIMIT 1";
+			query($query);
+
+			if(!empty($row)) 
+			{
+				auth($row[0]);
+			}
+
 			message("Account updated successfully!");
 			redirect("profile");
 		}
