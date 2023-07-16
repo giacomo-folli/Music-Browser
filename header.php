@@ -22,11 +22,13 @@
 				<a href="artists.php" class="class_7"  >
 					Artists
 				</a>
-				<?php if(is_logged_in()): ?>
+				<?php if(get_role() == ''): ?>
 					<a href="upload.php" class="class_7"  >
 						Upload
 					</a>
-					<a href="profile.php" class="class_7"  >
+				<?php endif; ?>
+				<?php if(is_logged_in()): ?>
+					<a href="profile<?=get_role()?>.php" class="class_7"  >
 						Profile
 					</a>	
 				<?php endif; ?>

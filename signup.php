@@ -11,6 +11,7 @@
 		$last_name = addslashes($_POST['last_name']);
 		$username = addslashes($_POST['username']);
 		$password = addslashes($_POST['password']);
+		$role = addslashes($_POST['role']);
 
 		//validate data
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -31,7 +32,6 @@
 
 		if(empty($errors)){
 			$password = password_hash($password, PASSWORD_DEFAULT);
-			$role = "user";
 			$query = "INSERT INTO users (username, first_name, last_name, email, password, role, date) VALUES ('$username', '$first_name', '$last_name', '$email', '$password', '$role', NOW())";
 			query($query);
 
@@ -92,6 +92,16 @@
 							Retype Password
 						</label>
 						<input placeholder="" type="text" name="retype_password" class="class_12" >
+					</div>
+					<div style="margin:auto;display:flex" class="class_24" >
+						<div style="flex:1">
+							<input type="radio" id="user" name="role" value="user">
+							<label for="html">User</label><br>
+						</div>
+						<div style="flex:1">
+							<input type="radio" id="music" name="role" value="music">
+							<label for="css">Artist</label><br>
+						</div>
 					</div>
 					<div style="padding:10px;">
 						Already have an account? <a href="login.php">Login</a>

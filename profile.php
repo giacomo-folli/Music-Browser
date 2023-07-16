@@ -5,6 +5,9 @@
 
 	$id = $_GET['id'] ?? user('id'); 	// Ottieni ID utente dalla query string o utilizza l'ID dell'utente autenticato corrente
 	$id = (int)$id; 					// Safety control
+
+	if($id == user('id') && user('role') == 'user')			
+		redirect('profile_user'); 		
 	
 	$query = "select * from users where id = '$id' limit 1"; 	
  	$row = query($query);
@@ -60,7 +63,7 @@
 					<div class="class_18" style="margin-bottom: 10px;" >
 						<?=$row['username']?> 
 					</div>
-					
+
 					<div class="class_39" >
 						<div class="class_40" >
 							<i class="bi bi-vinyl-fill class_41">

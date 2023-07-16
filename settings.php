@@ -89,7 +89,7 @@
 			}
 
 			message("Account updated successfully!");
-			redirect("profile");
+			redirect("profile" . get_role());
 		}
 	}
 ?>

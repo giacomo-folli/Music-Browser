@@ -85,7 +85,14 @@ function user($key)
         return $_SESSION['USER'][$key];
 
     return '';
-}   
+}  
+
+function get_role()
+{
+    if(user('role') == 'music')
+        return '';
+    return '_user';
+}
 
 function esc($str) 
 {  

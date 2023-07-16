@@ -3,9 +3,8 @@
 	require 'init.php';
 	$title = "Artists";
 
-	$query = "SELECT * FROM users WHERE role = 'user' ORDER BY id DESC LIMIT 30";
+	$query = "SELECT * FROM users WHERE role = 'music' ORDER BY id DESC LIMIT 30";
  	$users = query($query);
-
 ?>
 
 <?php require 'header.php';?>

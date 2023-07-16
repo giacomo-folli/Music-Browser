@@ -6,6 +6,9 @@
 	if(!is_logged_in())
 		redirect('login');
 
+	if(get_role() != '')
+		redirect('index');
+
 	$button_title = "Save";
 	$mode = $_GET['mode'] ?? "new";
 	$id = $_GET['id'] ?? 0;
