@@ -94,7 +94,7 @@ function esc($str)
 
 function redirect(string $url)
 {
-    header("Location: $url.php");
+    header("Location:$url.php");
     die;
 }
 

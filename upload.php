@@ -85,28 +85,25 @@
 
 			if(!empty($image))
 			{
-				move_uploaded_file($_FILES['image']['tmp_name'], $image);
-
-				if($mode == 'edit' && file_exists($song['image']))
+			    if($mode == 'edit' && file_exists($song['image']))
 					unlink($song['image']);
+					
+				move_uploaded_file($_FILES['image']['tmp_name'], $image);
 			}	
 			if(!empty($file))
 			{
-				move_uploaded_file($_FILES['file']['tmp_name'], $file);
-
 				if($mode == 'edit' && file_exists($song['file']))
 					unlink($song['file']);
+					
+				move_uploaded_file($_FILES['file']['tmp_name'], $file);
 			}	
 
-			$query = "INSERT INTO songs (user_id, file, image, title, date) VALUES ('$user_id', '$file', '$image', '$title', NOW())";
-			message("Your song successfully added!");
-			
 			if($mode == 'edit')
 			{
 				$query = "UPDATE songs SET title = '$title' $image_str $file_str WHERE id = '$id' && user_id = '$user_id' LIMIT 1";
 				message("Your song successfully edited!");
 			}
-			if($mode == 'delete')
+		    else if($mode == 'delete')
 			{
 				$query = "DELETE FROM songs WHERE id = '$id' && user_id = '$user_id' LIMIT 1";
 				message("Your song successfully deleted!");
@@ -117,7 +114,11 @@
 				if(file_exists($song['file']))
 					unlink($song['file']);
 			}
-
+			else {
+			    $query = "INSERT INTO songs (user_id, file, image, title, date) VALUES ('$user_id', '$file', '$image', '$title', NOW())";
+			    message("Your song successfully added!");
+			}
+			
 			query($query);
 			redirect("profile");
 		}

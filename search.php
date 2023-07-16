@@ -31,15 +31,22 @@
 
 <?php require 'header.php';?>
 
+<form style="background-color:#000000dd;" method="get" action="search.php" class="class_10" >
+	<label class="class_11"  >
+		Search
+	</label>
+	<input value="<?=$_GET['q'] ?? ''?>" placeholder="" type="text" name="q" class="class_12" >
+</form>
+
 <h1 class="class_14"  >
     Search results
 </h1>
 
-<div class="class_15" >
+<div class="class_1515" >
     <?php if(!empty($songs)):?>
         <?php foreach($songs as $song):?>
-            <a href="song.php?id=<?=$song['id']?>" class="class_16" >
-                <img src="<?=get_image($song['image'])?>"  backup="" class="class_17 item_class_3">
+            <a href="song.php?id=<?=$song['id']?>" class="class_1616" >
+                <img src="<?=get_image($song['image'])?>"  backup="" class="class_17 class_1717">
                 <h3 class="class_18"  >
                     <?=esc($song['title'])?>
                 </h3>

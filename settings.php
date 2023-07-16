@@ -45,7 +45,7 @@
 			mkdir($folder, 0777, true);
 		}
 
-		$image_str = "";
+		$image_str = $password_str = "";
 
 		if(!empty($_FILES['image']['name']))
 		{
@@ -81,7 +81,7 @@
 			query($query);
 
 			$query = "SELECT * FROM users WHERE id = '$id' LIMIT 1";
-			query($query);
+			$row = query($query);
 
 			if(!empty($row)) 
 			{

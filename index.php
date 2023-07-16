@@ -23,29 +23,46 @@
 
 <?php require 'header.php';?>
 
-<div class="class_13" >
-	<h1 class="class_14"  >
-		Music Website
+<form style="background-color:#000000dd;" method="get" action="search.php" class="class_10_index" >
+	<label class="class_11"  >
+		Search
+	</label>
+	<input value="<?=$_GET['q'] ?? ''?>" placeholder="" type="text" name="q" class="class_12" >
+</form>
+
+<div class="class_13 fix_me" >
+	<h1 class="class_14_index" >
+		melodiouss | share your melodies
 	</h1>
 </div>
 
-<div class="class_15" >
+<div class="class_15">
 	<?php if(!empty($songs)):?>
 		<?php foreach($songs as $song):?>
-			<a href="song.php?id=<?=$song['id']?>" class="class_16" >
+			<a href="song.php?id=<?=$song['id']?>" class="class_16" id="song_card" >
 				<img src="<?=get_image($song['image'])?>"  backup="" class="class_17 item_class_3">
-				<h3 class="class_18"  >
-					<?=esc($song['title'])?>
-				</h3>
-				<div class="class_19" >
-					<i class="bi bi-person-fill class_20"></i>
-					<div class="class_21"  >
-						<?=$song['artist']['first_name'] ?? 'Unknown' ?> <?=$song['artist']['last_name'] ?? '' ?>
+
+				<div class="credits">
+				
+					<div class="class_19 class_name">
+						<i class="bi bi-music-note-beamed class_20"></i>
+						<div class="class_18" >
+							<strong><?=esc($song['title'])?></strong>
+						</div>
 					</div>
+
+					<div class="class_19">
+						<i class="bi bi-person-fill class_20"></i>
+						<div class="class_21"  >
+							<?=$song['artist']['username'] ?? 'Unknown' ?>
+						</div>
+					</div>
+
 				</div>
+
 			</a>
 		<?php endforeach;?>
 	<?php endif;?>
 </div>
  
-<?php require 'footer.php';?>
+<?php require 'footer.php';?> 
