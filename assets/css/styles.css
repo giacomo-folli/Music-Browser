@@ -15,6 +15,11 @@
 	  word-break: break-word;
 	  word-wrap: break-word;
   }
+
+  header {
+	background-color:#ffffff;
+	align-items:center;
+  }
 	  
   .item_class_1
   {
@@ -26,45 +31,18 @@
 	  display:flex;
   }
   
-  @media screen and (max-width:992px)
-  {
-	  .item_class_1 {
-		  display: block;
-		  cursor: pointer;
-	  }
-  
-	  .item_class_2 a	{
-		  width: 100%;
-	  }
-  
-	  .item_class_2 {
-		  position: absolute;
-		  flex-direction: column;
-		  top: 100%;
-		  left: 0px;
-		  width: 100%;
-		  min-width: 200px;
-		  display: none;
-	  }
-  
-	  .item_class_0:hover > .item_class_2{
-		  display: flex;
-	  }
-  
-  }
-  
   .item_class_3:hover {
 	  height: auto!important; 
 	  object-fit: cover!important; 
 	  transform: scale(1.2)!important;
   }
   
-  .class_1{
-	  background-color: #eee;
+  .class_1 {
+	  background-color: #ffffff;
 	  display: flex;
   }
   
-  .class_2{
+  .class_2 {
 	  flex:1;
 	  max-width:120px;
 	  background-color: white;
@@ -75,7 +53,6 @@
 	  width: 100%;
 	  height:50px;
 	  object-fit:cover;
-	  
   }
   
   .class_4{
@@ -85,14 +62,12 @@
 	  flex-wrap: wrap;
 	  align-items:center;
 	  justify-content: flex-start;
-	  background-color: white;
-	  
+	  background-color: white;  
   }
   
   .class_5{
-	  flex:1;
+	  display: none;
 	  max-width: 30px;
-	  
   }
   
   .class_6{
@@ -213,17 +188,6 @@
   	flex-direction: column;
   }
 
-  @media screen and (max-width: 600px) and (min-width: 451px) {
-	.class_14 {
-		font-stretch: extra-condensed;
-		font-size: 1.5rem;
-	}
-
-	.class_13{
-		height: 130px
-	}
-  }
-
   .class_14 {
 	padding-left: 10px;
 	padding-right: 10px;
@@ -238,20 +202,6 @@
 	  padding-right: 10px;
 	  text-align: center;
 	  margin-top: auto;	  
-  }
-
-  @media screen and (max-width: 450px) {
-	.class_14 {
-		display: none;
-	}
-
-	.class_7 {
-		min-width: 40px;
-	}
-
-	.class_13 {
-		height: 50px
-	}
   }
   
   .class_15{
@@ -744,4 +694,87 @@
 	  text-decoration: none;
 	  object-fit: contain;
   }
-  
+
+  #click {
+	display: none;
+  }
+
+  .menu-btn > i {
+	color:#000;
+	font-size: 30px;
+	cursor: pointer;
+	display: none;
+  }
+
+@media screen and (max-width: 940px) 
+  {
+	.menu-btn > i {
+		display: block;
+	}
+
+	.menubar, .class_14_index {
+		display: none;
+	}
+
+	.class_13 {
+		height: 55px;
+	}
+
+	.class_1 {
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		z-index: 2;
+	}
+
+	.dropdown > .class_7 {
+		border: none;
+	}
+
+	.dropdown{
+		position: fixed;
+		top: 58px;
+		left: -100%;
+		background: #111;
+		height: 100vh;
+		width: 100%;
+		display: block;
+		text-align: center;
+		z-index: 1;
+		transition: all 0.3s ease;
+	}
+
+	.dropdown > a {
+		margin: 40px 0;
+		font-size: 20px;
+		display: block;
+		background: none;
+		color: #fff;
+	}
+
+	.dropdown > a:hover {
+		color: cyan;
+		background: none;
+	}
+	
+	/* Apply the "hidden" class to the dropdown when the checkbox is checked */
+	#click:checked ~ .item_class_0 .dropdown {
+		left: 0;
+	}
+  }
+
+  @media screen and (min-width: 940px) {
+	.dropdown {
+		display: none;
+	}
+
+	.menubar {
+		display: flex;
+	}
+
+	.class_7:hover, .class_7_login:hover {
+	background: #000000;
+	color: #ffffff;
+	}
+  }
