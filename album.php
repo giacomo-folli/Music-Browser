@@ -2,6 +2,9 @@
 	require 'init.php';
 	$title = "Album";
 
+    if(!is_logged_in())
+		redirect("login");
+
 	$album_id = $_GET['id'] ?? 0;
     $album_id = (int) $album_id;
 

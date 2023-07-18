@@ -2,6 +2,9 @@
 	require 'init.php';
 	$title = "Song";
 
+	if(!is_logged_in())
+		redirect("login");
+
 	$song_id = $_GET['id'] ?? 0;
     $song_id = (int) $song_id;
 

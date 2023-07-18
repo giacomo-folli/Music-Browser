@@ -3,6 +3,9 @@
 	require 'init.php'; 
 	$title = "User profile"; 
 
+	if(!is_logged_in())
+		redirect("login");
+
 	$id = $_GET['id'] ?? user('id'); 	// Ottieni ID utente dalla query string o utilizza l'ID dell'utente autenticato corrente
 	$id = (int)$id; 					// Safety control
 	
@@ -46,11 +49,6 @@
                         </button>
                     </a>
                     
-				</div>
-				<div class="class_43" >
-
-					<!-- Verifica se ci sono canzoni caricate dall'artista -->
-
 				</div>
 			<?php endif;?>
 		</div>

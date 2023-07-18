@@ -3,6 +3,9 @@
 	require 'init.php'; 
 	$title = "Profile"; 
 
+	if(!is_logged_in())
+		redirect("login");
+
 	$id = $_GET['id'] ?? user('id'); 	// Ottieni ID utente dalla query string o utilizza l'ID dell'utente autenticato corrente
 	$id = (int)$id; 					// Safety control
 

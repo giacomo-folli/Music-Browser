@@ -1,7 +1,9 @@
 <?php
-
 	require 'init.php';
 	$title = "Search";
+
+	if(!is_logged_in())
+		redirect("login");
 
 	$limit = 30;
 	$find = $_GET['q'] ?? null;

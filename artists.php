@@ -3,6 +3,11 @@
 	require 'init.php';
 	$title = "Artists";
 
+    if(!is_logged_in()){
+        message("You must be logged in first");
+        redirect("login");
+    }
+
 	$query = "SELECT * FROM users WHERE role = 'music' ORDER BY id DESC LIMIT 30";
  	$users = query($query);
 ?>
