@@ -19,7 +19,7 @@
 			if(password_verify($password, $row['password'])) {
 				//authenticate
 				auth($row);
-				redirect("profile");
+				redirect("index");
 			} else {
 				$errors['email'] = "Invalid email or password";
 			}
@@ -37,7 +37,7 @@
 					<h1 class="class_18"  >
 						Login
 					</h1>
-					<img src="assets/images/image4.jpg" class="class_59" >
+					<img src="assets/images/index.jpg" class="class_59" >
 
 					<div style="color:red;padding:10px;">
 						<?php

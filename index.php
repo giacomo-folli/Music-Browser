@@ -27,7 +27,7 @@
 
 <?php require 'header.php';?>
 
-<div id="preloader"></div>
+<!-- <div id="preloader"></div> -->
 
 <form style="background-color:#000000dd;" method="get" action="search.php" class="class_10_index" >
 	<label class="class_11"  >

@@ -49,7 +49,7 @@
 					<h1 class="class_18"  >
 						Signup
 					</h1>
-					<img src="assets/images/image4.jpg" class="class_59">
+					<img src="assets/images/index.jpg" class="class_59">
 					<div style="color:red;padding:10px;">
 						<?php
 							if(!empty($errors)) {

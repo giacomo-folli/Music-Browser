@@ -20,21 +20,21 @@
 
 		<div  class="item_class_0 class_4">
 			<div class="menubar class_6">
-				<a href="index.php" class="class_7"  >
-					Home
-				</a>
-				<a href="artists.php" class="class_7"  >
-					Artists
-				</a>
+				<?php if(is_logged_in()): ?>
+					<a href="index.php" class="class_7"  >
+						Home
+					</a>
+					<a href="artists.php" class="class_7"  >
+						Artists
+					</a>
+					<a href="profile<?=get_role()?>.php" class="class_7"  >
+						Profile
+					</a>	
+				<?php endif; ?>
 				<?php if(get_role() == ''): ?>
 					<a href="upload.php" class="class_7"  >
 						Upload
 					</a>
-				<?php endif; ?>
-				<?php if(is_logged_in()): ?>
-					<a href="profile<?=get_role()?>.php" class="class_7"  >
-						Profile
-					</a>	
 				<?php endif; ?>
 				<a href="info.php" class="class_7"  >
 					About us
