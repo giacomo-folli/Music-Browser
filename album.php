@@ -24,7 +24,7 @@
         <h1 style="color:#100; font-size:26px;margin:0">
             Album: <?=$album['title']?>
         </h1>
-        <img src="<?=get_image($album['image'])?>" class="class_38" style="min-width:20em; height:auto;">
+        <img src="<?=get_image($songs[0]['image'])?>" class="class_38" style="min-width:20em; height:auto;">
 
         <?php if(!empty($songs)): ?>
             <?php foreach($songs as $song): ?>

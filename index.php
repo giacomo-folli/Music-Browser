@@ -2,11 +2,12 @@
 	require 'init.php';
 	$title = "Home";
 
-	$query = "SELECT * FROM songs ORDER BY id DESC LIMIT 10";
+	$query = "SELECT * FROM songs ORDER BY id DESC LIMIT 30";
 	$songs = query($query);
 
 	if(!empty($songs)) 
 	{
+		shuffle($songs);
 		foreach($songs as $key => $row)
 		{
 			$id = $row['user_id'];

@@ -38,16 +38,15 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST") //Something was posted 
 	{
 		$errors = [];
-		$title = addslashes($_POST['title']);
 
-		if(empty($title))
+		if(empty($_POST['title']))
 			$errors['title'] = "Title is required";
 
 		$folder = "uploads/";
 		if(!file_exists($folder))
 			mkdir($folder, 0777, true);
 
-		$file_str = $image_str = "";
+		$file_str = $album_id = $image_str = "";
 
 		if(!empty($_FILES['file']['name']))
 		{
@@ -100,10 +99,14 @@
 					
 				move_uploaded_file($_FILES['file']['tmp_name'], $file);
 			}	
+			if($_POST['album_id'] != '')
+				$album_id = ", album_id = '$album_id' ";
+
+			$title = addslashes($_POST['title']);
 
 			if($mode == 'edit')
 			{
-				$query = "UPDATE songs SET title = '$title' $image_str $file_str WHERE id = '$id' && user_id = '$user_id' LIMIT 1";
+				$query = "UPDATE songs SET title = '$title' $album_id $image_str $file_str WHERE id = '$id' && user_id = '$user_id' LIMIT 1";
 				message("Your song successfully edited!");
 			}
 		    else if($mode == 'delete')
@@ -118,7 +121,9 @@
 					unlink($song['file']);
 			}
 			else {
-			    $query = "INSERT INTO songs (user_id, file, image, title, date) VALUES ('$user_id', '$file', '$image', '$title', NOW())";
+				$album_id = addslashes($_POST['album_id']);
+
+			    $query = "INSERT INTO songs (user_id, file, image, title, album_id, date) VALUES ('$user_id', '$file', '$image', '$title', '$album_id', NOW())";
 			    message("Your song successfully added!");
 			}
 			
@@ -168,12 +173,14 @@
 				</div>
 				<input onchange="load_file(this.files[0])" type="file" name="file" >
 			</div>
->
-			<div class="class_1211">
-				<input type="checkbox" id="album_opt">
-				<label for="html">Insert into album</label>
-				<input value="" placeholder="Album id" type="text" name="album_id" class="class_1212 class_12">
-			</div>
+
+			<?php if($mode != 'delete'): ?>
+				<div class="class_1211">
+					<input type="checkbox" id="album_opt">
+					<label for="html">Insert into album</label>
+					<input value="<?=old_value('album_id', $song['album_id'] ?? '')?>" placeholder="Album id" type="text" name="album_id" class="class_1212 class_12">
+				</div>
+			<?php endif; ?>
 
 			<div class="class_31" >
 				<button class="class_32"  >
