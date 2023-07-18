@@ -168,6 +168,13 @@
 				</div>
 				<input onchange="load_file(this.files[0])" type="file" name="file" >
 			</div>
+>
+			<div class="class_1211">
+				<input type="checkbox" id="album_opt">
+				<label for="html">Insert into album</label>
+				<input value="" placeholder="Album id" type="text" name="album_id" class="class_1212 class_12">
+			</div>
+
 			<div class="class_31" >
 				<button class="class_32"  >
 					<?=$button_title?>

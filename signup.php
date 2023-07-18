@@ -5,6 +5,7 @@
 
 	if($_SERVER['REQUEST_METHOD'] == "POST") //Something was posted
 	{
+		$role= "";
 		$errors = [];
 		$email = addslashes($_POST['email']);
 		$first_name = addslashes($_POST['first_name']);
@@ -14,21 +15,20 @@
 		$role = addslashes($_POST['role']);
 
 		//validate data
-		if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		if(!filter_var($email, FILTER_VALIDATE_EMAIL))
 			$errors['email'] = "Invalid email";
-		}
 
-		if(!preg_match("/^[a-zA-Z]+$/", trim($username))) {
+		if(!preg_match("/^[a-zA-Zèéàòìù]+$/", trim($username)))
 			$errors['username'] = "User name can only have letters without spaces";
-		}
 
-		if(!preg_match("/^[a-zA-Z]+$/", trim($first_name)))	{
+		if(!preg_match("/^[a-zA-Zèéàòìù]+$/", trim($first_name)))
 			$errors['first_name'] = "First name can only have letters without spaces";
-		}
 
-		if(!preg_match("/^[a-zA-Z]+$/", trim($last_name))) {
+		if(!preg_match("/^[a-zA-Zèéàòìù]+$/", trim($last_name)))
 			$errors['last_name'] = "Last name can only have letters without spaces";
-		}
+
+		if($role != "music" && $role != "user") 
+			$errors['role'] = "You hate to choose a role";
 
 		if(empty($errors)){
 			$password = password_hash($password, PASSWORD_DEFAULT);
@@ -95,11 +95,11 @@
 					</div>
 					<div style="margin:auto;display:flex" class="class_24" >
 						<div style="flex:1">
-							<input type="radio" id="user" name="role" value="user">
+							<input type="radio" id="radio" name="role" value="user">
 							<label for="html">User</label><br>
 						</div>
 						<div style="flex:1">
-							<input type="radio" id="music" name="role" value="music">
+							<input type="radio" id="radio" name="role" value="music">
 							<label for="css">Artist</label><br>
 						</div>
 					</div>

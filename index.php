@@ -23,6 +23,10 @@
 
 <?php require 'header.php';?>
 
+<?php if(!is_logged_in()): ?>
+	<div id="preloader"></div>	
+<?php endif; ?>
+
 <form style="background-color:#000000dd;" method="get" action="search.php" class="class_10_index" >
 	<label class="class_11"  >
 		Search
@@ -64,5 +68,17 @@
 		<?php endforeach;?>
 	<?php endif;?>
 </div>
+
+<?php if(!is_logged_in()): ?>
+	<script>
+		var loader = document.getElementById("preloader");
+		window.addEventListener("load", () => {
+		setTimeout(() => {
+			loader.style.display = "none";
+		}, 3000);
+		});
+	</script>
+<?php endif; ?>
+
  
 <?php require 'footer.php';?> 

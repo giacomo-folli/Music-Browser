@@ -27,15 +27,15 @@
 			$errors['email'] = "Invalid email";
 		}
 
-		if(!preg_match("/^[a-zA-Z]+$/", trim($username))) {
+		if(!preg_match("/^[a-zA-Zèéàòìù]+$/", trim($username))) {
 			$errors['username'] = "User name can only have letters without spaces";
 		}
 
-		if(!preg_match("/^[a-zA-Z]+$/", trim($first_name)))	{
+		if(!preg_match("/^[a-zA-Zèéàòìù]+$/", trim($first_name)))	{
 			$errors['first_name'] = "First name can only have letters without spaces";
 		}
 
-		if(!preg_match("/^[a-zA-Z]+$/", trim($last_name))) {
+		if(!preg_match("/^[a-zA-Zèéàòìù]+$/", trim($last_name))) {
 			$errors['last_name'] = "Last name can only have letters without spaces";
 		}
 

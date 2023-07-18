@@ -24,6 +24,11 @@
 		if(user('id') != $song['user_id'])
 			add_page_view($song['id']); //add a view to song
 
+		$album_titles = query("SELECT album.title FROM album JOIN songs ON album.id=songs.album_id WHERE songs.id = $song_id;");
+
+		if (!empty($album_titles))
+			$album_title = $album_titles[0]['title'];
+
 		//add_song_download($song['id']);
 	}
 ?>
@@ -32,7 +37,16 @@
  
 	<div class="class_35" >
 		<?php if(!empty($row)): ?>
-			<h1 class="class_14"  >	Now Playing by: <a style="text-decoration:none;" href="profile.php?id=<?=$row['id']?>">	<?=$row['username']?> </a>
+			<h1 class="class_14"  >	
+				Now Playing:  
+				<a style="text-decoration:none;" href="profile.php?id=<?=$row['id']?>">	
+					<?=$row['username']?> 
+				</a>
+				<?php if(!empty($album_titles)): ?>
+					| from <a href="album.php?id=<?=$song['album_id']?>"> 	
+						<?=$album_title?>
+					</a>
+				<?php endif; ?>
 			</h1>
 		<?php endif; ?>
 
