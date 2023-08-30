@@ -11,6 +11,7 @@
 	if(!empty($songs)) 
 	{
 		shuffle($songs);
+		
 		foreach($songs as $key => $row)
 		{
 			$id = $row['user_id'];
